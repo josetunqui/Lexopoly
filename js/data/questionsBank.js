@@ -1,0 +1,819 @@
+/**
+ * ============================================================================
+ * LEXOPOLY — BANCO DE PREGUNTAS JURÍDICAS (31 PREGUNTAS OFICIALES)
+ * ============================================================================
+ * Bloques temáticos:
+ *   I.  Medidas cautelares (16 preguntas: MC-001 a MC-016)
+ *   II. Proceso único de ejecución (15 preguntas: PUE-001 a PUE-015)
+ *
+ * Selección 100 % aleatoria sin repetición durante la partida (Fisher-Yates).
+ * Cada pregunta incluye el enunciado exacto, las 4 opciones (A, B, C, D),
+ * la respuesta correcta, retroalimentación procesal y cita del Código Procesal Civil.
+ */
+(function (global) {
+  'use strict';
+
+  const QUESTIONS_BANK = [
+    // ==========================================================================
+    // BLOQUE 1 · I. MEDIDAS CAUTELARES (Preguntas 1 a 5)
+    // ==========================================================================
+    {
+      id: 'MC-001',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Finalidad principal de la medida cautelar',
+      caseText: 'Evaluación sobre los fines e instrumentalidad de la tutela cautelar en el proceso civil.',
+      questionPrompt: '1. ¿Cuál es la finalidad principal de una medida cautelar?',
+      options: {
+        A: 'Castigar al demandado antes de la sentencia.',
+        B: 'Garantizar que la decisión final pueda cumplirse.',
+        C: 'Resolver definitivamente el conflicto.',
+        D: 'Evitar que el demandante presente pruebas.'
+      },
+      correctOption: 'B',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Las medidas cautelares son instrumentales y buscan asegurar que el fallo definitivo no resulte ilusorio ni imposible de ejecutar.',
+      feedbackWrong:
+        'La medida cautelar no es una sanción anticipada ni resuelve el fondo del litigio; su único propósito es garantizar la eficacia práctica de la sentencia final.',
+      legalCitation: 'Art. 608 del Código Procesal Civil · Finalidad de las medidas cautelares.'
+    },
+    {
+      id: 'MC-002',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Afectación preventiva del patrimonio del deudor',
+      caseText: 'Caso práctico sobre aseguramiento de pretensión dineraria frente a actos de disposición patrimonial.',
+      questionPrompt: '2. Juan demanda a Pedro por una deuda y teme que Pedro venda todos sus bienes para no pagar. ¿Qué medida podría solicitar Juan?',
+      options: {
+        A: 'Una medida de embargo.',
+        B: 'Una conciliación extrajudicial.',
+        C: 'Una sentencia anticipada.',
+        D: 'Una apelación.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Cuando la pretensión principal es apreciable en dinero, se puede solicitar embargo para afectar jurídicamente bienes o derechos del presunto obligado.',
+      feedbackWrong:
+        'Ante el riesgo de insolvencia provocada del deudor, la medida idónea para asegurar el cobro futuro de una deuda es el embargo.',
+      legalCitation: 'Art. 642 del Código Procesal Civil · Embargo.'
+    },
+    {
+      id: 'MC-003',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Requisito respecto del derecho invocado',
+      caseText: 'Análisis de los presupuestos para la concesión de una medida cautelar por el juez.',
+      questionPrompt: '3. ¿Qué requisito debe demostrar quien solicita una medida cautelar respecto de su derecho?',
+      options: {
+        A: 'Que ya ganó el juicio.',
+        B: 'Que el demandado aceptó la demanda.',
+        C: 'La verosimilitud del derecho invocado.',
+        D: 'Que existe una sentencia firme.'
+      },
+      correctOption: 'C',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Al solicitar una medida cautelar no se exige certeza absoluta (propia de la sentencia), sino acreditar la verosimilitud o apariencia fundada del derecho (fumus boni iuris).',
+      feedbackWrong:
+        'Para conceder tutela cautelar solo se requiere un juicio de probabilidad denominado verosimilitud del derecho invocado.',
+      legalCitation: 'Art. 611 inc. 1 del Código Procesal Civil · Presupuesto de verosimilitud (Fumus boni iuris).'
+    },
+    {
+      id: 'MC-004',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Concepto de peligro en la demora (periculum in mora)',
+      caseText: 'Evaluación del presupuesto de urgencia procesal en las medidas cautelares.',
+      questionPrompt: '4. ¿Qué significa el peligro en la demora (periculum in mora)?',
+      options: {
+        A: 'Que el juez demoró en dictar sentencia por negligencia.',
+        B: 'Que existe riesgo de que esperar el proceso vuelva ineficaz la decisión final.',
+        C: 'Que el demandante no tiene abogado.',
+        D: 'Que el demandado no quiere conciliar.'
+      },
+      correctOption: 'B',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'PERDIDA_TURNO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Recurso Improcedente (Pierdes el próximo turno)',
+      feedbackCorrect:
+        'El periculum in mora radica en el riesgo objetivo de que la duración natural del proceso principal torne inejecutable o ilusoria la futura sentencia.',
+      feedbackWrong:
+        'El peligro en la demora alude al riesgo de que el transcurso del tiempo frustre la eficacia práctica de la decisión definitiva.',
+      legalCitation: 'Art. 611 inc. 2 del Código Procesal Civil · Peligro en la demora (Periculum in mora).'
+    },
+    {
+      id: 'MC-005',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Afectación de cuentas bancarias del deudor',
+      caseText: 'Caso práctico sobre aseguramiento dinerario mediante retención de fondos en entidades financieras.',
+      questionPrompt: '5. María solicita que se retenga dinero de una cuenta bancaria de su deudor para asegurar el pago de una deuda. ¿Qué medida cautelar está relacionada con este caso?',
+      options: {
+        A: 'Embargo en forma de retención.',
+        B: 'Medida temporal sobre el fondo.',
+        C: 'Medida innovativa.',
+        D: 'Anotación de demanda.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'El embargo en forma de retención recae sobre bienes o derechos de crédito del obligado que se encuentran en posesión de terceros, como fondos en cuentas bancarias.',
+      feedbackWrong:
+        'Cuando se busca inmovilizar fondos depositados en una entidad bancaria para asegurar una acreencia, corresponde el embargo en forma de retención.',
+      legalCitation: 'Art. 657 del Código Procesal Civil · Embargo en forma de retención.'
+    },
+
+    // ==========================================================================
+    // BLOQUE 1 · II. PROCESO ÚNICO DE EJECUCIÓN (Preguntas 6 a 10)
+    // ==========================================================================
+    {
+      id: 'PUE-001',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Vía procesal para el cobro de un pagaré',
+      caseText: 'Caso práctico sobre tutela ejecutiva de obligaciones documentadas en títulos valores.',
+      questionPrompt: '6. Pedro tiene un pagaré que acredita una deuda vencida y exigible. ¿Qué proceso puede iniciar para exigir el pago?',
+      options: {
+        A: 'Proceso de conocimiento.',
+        B: 'Proceso abreviado.',
+        C: 'Proceso único de ejecución.',
+        D: 'Proceso no contencioso.'
+      },
+      correctOption: 'C',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'El pagaré que cumple los requisitos de ley constituye un título ejecutivo extrajudicial que faculta a promover directamente el proceso único de ejecución.',
+      feedbackWrong:
+        'Al contar con un título ejecutivo (pagaré con deuda vencida y exigible), el acreedor acude directamente al proceso único de ejecución.',
+      legalCitation: 'Art. 688 inc. 4 del Código Procesal Civil · Títulos ejecutivos.'
+    },
+    {
+      id: 'PUE-002',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Definición jurídica de título ejecutivo',
+      caseText: 'Evaluación sobre el presupuesto documental indispensable para iniciar la ejecución.',
+      questionPrompt: '7. ¿Qué es un título ejecutivo?',
+      options: {
+        A: 'Un documento que permite exigir judicialmente el cumplimiento de una obligación, si reúne los requisitos legales.',
+        B: 'Una simple conversación entre dos personas.',
+        C: 'Una resolución que siempre pone fin a un juicio.',
+        D: 'Un documento que únicamente acredita la identidad de una persona.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Conforme al principio nulla executio sine titulo, el título ejecutivo es el documento calificado por ley que contiene una obligación cierta, expresa y exigible.',
+      feedbackWrong:
+        'Sólo se puede promover ejecución en virtud de un documento al que la ley le otorga mérito ejecutivo por reunir los requisitos formales y sustanciales.',
+      legalCitation: 'Arts. 688 y 689 del Código Procesal Civil · Mérito y requisitos del título ejecutivo.'
+    },
+    {
+      id: 'PUE-003',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Defensa del ejecutado ante una deuda ya pagada',
+      caseText: 'Caso práctico sobre el ejercicio del derecho de defensa del deudor dentro de la ejecución.',
+      questionPrompt: '8. Si el ejecutado considera que la deuda ya fue pagada, ¿qué puede hacer dentro del proceso único de ejecución?',
+      options: {
+        A: 'Ignorar la demanda.',
+        B: 'Presentar una contradicción conforme a las causales legales.',
+        C: 'Solicitar que se elimine la deuda sin presentar pruebas.',
+        D: 'Cambiar de domicilio para evitar el proceso.'
+      },
+      correctOption: 'B',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Dentro del plazo legal tras ser notificado con el mandato ejecutivo, el ejecutado puede formular contradicción invocando la causal de extinción de la obligación.',
+      feedbackWrong:
+        'El medio técnico de oposición en el proceso único de ejecución es la contradicción fundada en las causales taxativas de ley (como el pago).',
+      legalCitation: 'Art. 690-D inc. 3 del Código Procesal Civil · Contradicción al mandato ejecutivo.'
+    },
+    {
+      id: 'PUE-004',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Objeto del mandato ejecutivo',
+      caseText: 'Análisis de la primera resolución judicial expedida tras calificar positivamente el título ejecutivo.',
+      questionPrompt: '9. En un proceso único de ejecución, ¿qué busca el mandato ejecutivo?',
+      options: {
+        A: 'Ordenar al ejecutado que cumpla con la obligación exigida.',
+        B: 'Declarar culpable penalmente al demandado.',
+        C: 'Iniciar una investigación policial.',
+        D: 'Convocar obligatoriamente a una conciliación.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'El mandato ejecutivo contiene una orden judicial directa para que el ejecutado cumpla la obligación contenida en el título bajo apercibimiento de ejecución forzada.',
+      feedbackWrong:
+        'El mandato ejecutivo es de naturaleza civil patrimonial y dispone el cumplimiento inmediato de la prestación debida.',
+      legalCitation: 'Art. 690-C del Código Procesal Civil · Mandato ejecutivo.'
+    },
+    {
+      id: 'PUE-005',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Incumplimiento del mandato ejecutivo y ejecución forzada',
+      caseText: 'Caso práctico sobre la negativa del deudor a cumplir voluntariamente el mandato judicial.',
+      questionPrompt: '10. Carlos tiene una deuda reconocida en un título ejecutivo, pero se niega a pagar pese al mandato judicial. ¿Qué puede ocurrir?',
+      options: {
+        A: 'El proceso termina automáticamente.',
+        B: 'El acreedor pierde su derecho.',
+        C: 'Se puede continuar con la ejecución forzada para satisfacer la obligación.',
+        D: 'El juez debe archivar el expediente.'
+      },
+      correctOption: 'C',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'PERDIDA_TURNO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Recurso Improcedente (Pierdes el próximo turno)',
+      feedbackCorrect:
+        'Ante la resistencia del ejecutado a cumplir el mandato, se hace efectivo el apercibimiento y se procede con la ejecución forzada sobre su patrimonio (remate o adjudicación).',
+      feedbackWrong:
+        'La negativa del deudor no detiene el proceso; por el contrario, habilita al órgano jurisdiccional a realizar forzosamente los bienes afectados para pagar al acreedor.',
+      legalCitation: 'Arts. 690-C y 725 del Código Procesal Civil · Ejecución forzada.'
+    },
+
+    // ==========================================================================
+    // BLOQUE 2 · I. MEDIDAS CAUTELARES (Preguntas 1 a 5)
+    // ==========================================================================
+    {
+      id: 'MC-006',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Presupuesto de apariencia razonable del derecho',
+      caseText: 'Evaluación doctrinaria y legal sobre los presupuestos para conceder tutela cautelar.',
+      questionPrompt: '1. En el ámbito del derecho procesal civil, ¿cómo se denomina al presupuesto cautelar que exige al solicitante demostrar la apariencia razonable de la existencia del derecho que reclama?',
+      options: {
+        A: 'El peligro en la demora o necesidad de tutela urgente.',
+        B: 'La verosimilitud del derecho invocado.',
+        C: 'La contracautela patrimonial o personal.',
+        D: 'La proporcionalidad de la medida.'
+      },
+      correctOption: 'B',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'La verosimilitud del derecho invocado (fumus boni iuris) consiste en acreditar ante el juez la apariencia razonable y verosímil de que la pretensión principal es atendible.',
+      feedbackWrong:
+        'La apariencia razonable de la existencia del derecho reclamado corresponde al presupuesto de la verosimilitud del derecho invocado.',
+      legalCitation: 'Art. 611 inc. 1 del Código Procesal Civil · Verosimilitud del derecho invocado.'
+    },
+    {
+      id: 'MC-007',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Medida cautelar fuera de proceso y omisión de demanda',
+      caseText: 'Consecuencia jurídica de no interponer la demanda principal dentro del plazo legal de 10 días.',
+      questionPrompt: '2. ¿Qué consecuencia procesal se produce cuando un demandante obtiene una medida cautelar antes de iniciar un proceso judicial, pero omite interponer la demanda principal dentro del plazo legal previsto?',
+      options: {
+        A: 'La medida caduca de pleno derecho.',
+        B: 'El juez ordena el embargo definitivo de los bienes.',
+        C: 'Se interrumpe el plazo de prescripción de la deuda.',
+        D: 'Se impone una multa compulsiva al solicitante.'
+      },
+      correctOption: 'A',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'PERDIDA_TURNO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Recurso Improcedente (Pierdes el próximo turno)',
+      feedbackCorrect:
+        'Ejecutada la medida cautelar fuera de proceso, el beneficiario debe interponer su demanda dentro de los 10 días posteriores; si no lo hace, la medida caduca de pleno derecho.',
+      feedbackWrong:
+        'Dado el carácter instrumental de toda medida cautelar, si no se interpone la demanda oportunamente, la medida cautelar caduca de pleno derecho.',
+      legalCitation: 'Art. 636 del Código Procesal Civil · Medida cautelar fuera de proceso y caducidad.'
+    },
+    {
+      id: 'MC-008',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Efecto de la sentencia infundada sobre la medida cautelar',
+      caseText: 'Análisis del régimen de cancelación de la medida cautelar tras sentencia desestimatoria en primera instancia.',
+      questionPrompt: '3. Si un juez de primera instancia emite una sentencia declarando infundada la demanda principal, ¿qué sucede por regla general con la medida cautelar que venía ejecutándose?',
+      options: {
+        A: 'Se mantiene vigente de manera indefinida hasta que la Corte Suprema resuelva.',
+        B: 'Se convierte automáticamente en un embargo definitivo.',
+        C: 'Queda cancelada, salvo que el demandante solicite y logre mantener su vigencia ampliando la contracautela.',
+        D: 'Se traslada de forma inmediata a la etapa de ejecución de sentencia.'
+      },
+      correctOption: 'C',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 2,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 2 casillas)',
+      feedbackCorrect:
+        'Si la sentencia en primera instancia declara infundada la demanda, la medida cautelar queda cancelada, aunque a pedido del solicitante el Juez podrá mantener su vigencia si ofrece contracautela de naturaleza real o fianza solidaria.',
+      feedbackWrong:
+        'Al desestimarse la demanda en primera instancia desaparece la verosimilitud inicial y la medida se cancela, salvo mantenimiento expreso con ampliación de contracautela.',
+      legalCitation: 'Art. 630 del Código Procesal Civil · Cancelación de la medida cautelar.'
+    },
+    {
+      id: 'MC-009',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Ejecución anticipada sobre el fondo (familia y alimentos)',
+      caseText: 'Clasificación de las medidas cautelares específicas cuando coinciden con la pretensión principal.',
+      questionPrompt: '4. ¿Ante qué tipo de medida cautelar nos encontramos cuando el juez ordena ejecutar anticipadamente lo que será el resultado final de la pretensión (por ejemplo, en casos de familia o alimentos)?',
+      options: {
+        A: 'Medida innovativa sobre situaciones de hecho.',
+        B: 'Ejecución anticipada de la futura decisión final (medidas temporales sobre el fondo).',
+        C: 'Embargo preventivo en forma de depósito.',
+        D: 'Medida genérica de no innovar.'
+      },
+      correctOption: 'B',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Las medidas temporales sobre el fondo consisten en la ejecución anticipada de lo que el Juez va a decidir en la sentencia, destacando la asignación anticipada de alimentos y asuntos de familia.',
+      feedbackWrong:
+        'Cuando el juez adelanta provisoriamente el contenido mismo de la futura sentencia por necesidad impostergable, se trata de una medida temporal sobre el fondo.',
+      legalCitation: 'Arts. 674 y 675 del Código Procesal Civil · Medida temporal sobre el fondo.'
+    },
+    {
+      id: 'MC-010',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Publicidad registral de litigio sobre bien inmueble',
+      caseText: 'Mecanismo cautelar destinado a enervar la buena fe registral de terceros adquirentes.',
+      questionPrompt: '5. ¿Qué medida cautelar específica se debe solicitar cuando se busca afectar un bien inmueble ya inscrito para publicitar ante terceros que existe un litigio pendiente sobre dicho bien?',
+      options: {
+        A: 'Secuestro conservativo con desposesión.',
+        B: 'Anotación de demanda en los Registros Públicos.',
+        C: 'Intervención en administración de bienes.',
+        D: 'Embargo en forma de inscripción registral genérica sin demanda.'
+      },
+      correctOption: 'B',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Cuando la pretensión discutida en el proceso principal está referida a derechos inscritos, la medida de anotación de demanda en los Registros Públicos asegura la publicidad del litigio frente a terceros.',
+      feedbackWrong:
+        'Para dar publicidad registral de que un inmueble inscrito es objeto de un litigio pendiente, la medida específica es la anotación de demanda en los Registros Públicos.',
+      legalCitation: 'Art. 673 del Código Procesal Civil · Anotación de demanda en los Registros Públicos.'
+    },
+
+    // ==========================================================================
+    // BLOQUE 2 · II. PROCESO ÚNICO DE EJECUCIÓN (Preguntas 6 a 10)
+    // ==========================================================================
+    {
+      id: 'PUE-006',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Requisitos copulativos de la obligación en el título ejecutivo',
+      caseText: 'Presupuestos sustanciales que debe verificar el juez para admitir a trámite la demanda ejecutiva.',
+      questionPrompt: '6. ¿Cuáles son los requisitos copulativos indispensables que debe reunir el título ejecutivo para que la demanda sea admitida a trámite?',
+      options: {
+        A: 'Que la obligación sea cierta, expresa, exigible y, de ser el caso, líquida o liquidable.',
+        B: 'Que el derecho sea verosímil, urgente y de carácter temporal.',
+        C: 'Que la pretensión sea exclusivamente de naturaleza constitutiva.',
+        D: 'Que el documento cuente con firmas legalizadas por más de dos testigos.'
+      },
+      correctOption: 'A',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Procede la ejecución cuando la obligación contenida en el título es cierta, expresa y exigible; y cuando consiste en dar suma de dinero, debe ser además líquida o liquidable mediante operación aritmética.',
+      feedbackWrong:
+        'Los requisitos comunes de todo título ejecutivo exigen que la obligación sea cierta, expresa, exigible y líquida o liquidable si es dineraria.',
+      legalCitation: 'Art. 689 del Código Procesal Civil · Requisitos comunes del título ejecutivo.'
+    },
+    {
+      id: 'PUE-007',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Mecanismo procesal de defensa del ejecutado',
+      caseText: 'Oposición técnica frente al mandato ejecutivo bajo causales taxativas.',
+      questionPrompt: '7. ¿Cómo se denomina al mecanismo procesal específico a través del cual el ejecutado (deudor) puede defenderse tras ser notificado con el mandato ejecutivo?',
+      options: {
+        A: 'La contestación ordinaria de la demanda.',
+        B: 'La contradicción, la cual se sustenta únicamente en causales legales específicas.',
+        C: 'La reconvención por enriquecimiento sin causa.',
+        D: 'La tacha de documentos por falsedad genérica.'
+      },
+      correctOption: 'B',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'En el proceso único de ejecución no existe contestación ordinaria sino contradicción, la cual solo puede fundarse en las causales taxativamente previstas por la ley.',
+      feedbackWrong:
+        'Tras ser emplazado con el mandato ejecutivo, el ejecutado ejerce su defensa formulando contradicción sustentada en causales legales específicas.',
+      legalCitation: 'Art. 690-D del Código Procesal Civil · Contradicción.'
+    },
+    {
+      id: 'PUE-008',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Limitación probatoria en la contradicción ejecutiva',
+      caseText: 'Regla especial sobre los únicos medios probatorios admisibles en el proceso único de ejecución.',
+      questionPrompt: '8. ¿Cuál es la regla probatoria aplicable al momento en que el ejecutado formula su contradicción en un proceso de ejecución?',
+      options: {
+        A: 'Se pueden ofrecer todo tipo de pruebas sin restricciones temporales.',
+        B: 'Solo se admiten como medios probatorios la declaración de parte, los documentos y la pericia.',
+        C: 'Únicamente se permite la prueba testifical y la inspección judicial.',
+        D: 'No se permite ningún tipo de prueba documental.'
+      },
+      correctOption: 'B',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'PERDIDA_TURNO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Recurso Improcedente (Pierdes el próximo turno)',
+      feedbackCorrect:
+        'Dada la naturaleza sumaria y cognición limitada del proceso único de ejecución, al formular contradicción solo son admisibles la declaración de parte, los documentos y la pericia.',
+      feedbackWrong:
+        'El Código Procesal Civil restringe la actividad probatoria en la contradicción exclusivamente a tres medios: declaración de parte, documentos y pericia.',
+      legalCitation: 'Art. 690-D segundo párrafo del Código Procesal Civil · Medios probatorios admisibles.'
+    },
+    {
+      id: 'PUE-009',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Resolución judicial ante la ausencia de contradicción',
+      caseText: 'Consecuencia procesal cuando el ejecutado deja vencer el plazo sin formular contradicción.',
+      questionPrompt: '9. ¿Qué resolución emite el juez en el proceso único de ejecución si el deudor emplazado no cumple con formular contradicción dentro del plazo establecido por ley?',
+      options: {
+        A: 'Un auto ordenando llevar adelante la ejecución.',
+        B: 'Una sentencia fundada que declara disuelto el vínculo obligatorio.',
+        C: 'Un auto que declara el abandono del proceso por inactividad.',
+        D: 'Una resolución de sobreseimiento definitivo.'
+      },
+      correctOption: 'A',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Si el ejecutado no formula contradicción dentro del plazo legal, el Juez expide sin más trámite un auto ordenando llevar adelante la ejecución.',
+      feedbackWrong:
+        'En el proceso único de ejecución la decisión que dispone continuar la ejecución ante la falta de contradicción tiene la forma de un auto que ordena llevar adelante la ejecución.',
+      legalCitation: 'Art. 690-E in fine del Código Procesal Civil · Trámite y auto de ejecución.'
+    },
+    {
+      id: 'PUE-010',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Título ejecutivo extrajudicial de origen comercial',
+      caseText: 'Identificación de los documentos cambiarios con mérito ejecutivo.',
+      questionPrompt: '10. ¿Qué clase de título ejecutivo extrajudicial de origen comercial se configura cuando un documento incorpora una obligación de pago y cuenta con la formalidad del protesto o la constancia de su sustitución legal?',
+      options: {
+        A: 'Una resolución judicial firme extranjera.',
+        B: 'Un título valor que confiere acción cambiaria.',
+        C: 'Un contrato de transacción extrajudicial notarial.',
+        D: 'Una liquidación de saldo de deudores morosos.'
+      },
+      correctOption: 'B',
+      rewardPoints: 40,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Son títulos ejecutivos los títulos valores que confieran la acción cambiaria, debidamente protestados o con la constancia de la formalidad sustitutoria del protesto respectiva.',
+      feedbackWrong:
+        'El documento mercantil que incorpora una obligación de pago y requiere protesto o formalidad sustitutoria para aparejar ejecución es el título valor que confiere acción cambiaria.',
+      legalCitation: 'Art. 688 inc. 4 del Código Procesal Civil y Ley N.° 27287 (Ley de Títulos Valores).'
+    },
+
+    // ==========================================================================
+    // BLOQUE 3 · I. MEDIDAS CAUTELARES (Preguntas 1 a 6)
+    // ==========================================================================
+    {
+      id: 'MC-011',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Provisionalidad y variabilidad de la medida cautelar',
+      caseText: 'Análisis de las características esenciales de toda medida cautelar durante el devenir del proceso.',
+      questionPrompt: '1. ¿Qué característica permite que una medida cautelar pueda modificarse durante el proceso?',
+      options: {
+        A: 'Su carácter definitivo.',
+        B: 'Su carácter provisional y variable.',
+        C: 'Su carácter sancionador.',
+        D: 'Su carácter obligatorio para ambas partes.'
+      },
+      correctOption: 'B',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Toda medida cautelar es provisoria, instrumental y variable, pudiendo modificarse o sustituirse a pedido de parte si varían las circunstancias que la motivaron.',
+      feedbackWrong:
+        'Las medidas cautelares nunca producen cosa juzgada material; su carácter provisional y variable permite adecuarlas durante el proceso.',
+      legalCitation: 'Arts. 612 y 617 del Código Procesal Civil · Características y variación de la medida cautelar.'
+    },
+    {
+      id: 'MC-012',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Concepto y función de la contracautela',
+      caseText: 'Presupuesto para la ejecución de la medida cautelar y garantía de resarcimiento.',
+      questionPrompt: '2. ¿Qué es la contracautela dentro de una medida cautelar?',
+      options: {
+        A: 'Una garantía para responder por los posibles daños que cause la medida.',
+        B: 'Una sanción económica para el demandado.',
+        C: 'Una forma de terminar el proceso.',
+        D: 'Una prueba presentada por el demandante.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'La contracautela tiene por objeto asegurar al afectado con una medida cautelar el resarcimiento de los daños y perjuicios que pueda causar su ejecución.',
+      feedbackWrong:
+        'La contracautela es una garantía (real o personal, como la caución juratoria) ofrecida por el solicitante para cubrir eventuales daños y perjuicios al afectado.',
+      legalCitation: 'Art. 613 del Código Procesal Civil · Contracautela y discrecionalidad del juez.'
+    },
+    {
+      id: 'MC-013',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Trámite inaudita altera pars de la medida cautelar',
+      caseText: 'Garantía de eficacia de la medida cautelar y ejercicio diferido del derecho de contradicción (oposición).',
+      questionPrompt: '3. ¿Qué sucede cuando una medida cautelar es concedida sin escuchar previamente a la otra parte?',
+      options: {
+        A: 'Se declara nulo todo el proceso.',
+        B: 'Se impide que el demandado pueda defenderse.',
+        C: 'Se concede sin conocimiento previo del afectado, quien podrá ejercer posteriormente su defensa.',
+        D: 'Se convierte en una sentencia definitiva.'
+      },
+      correctOption: 'C',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Por el principio inaudita altera pars, la solicitud cautelar se concede o rechaza sin conocimiento previo del afectado para evitar que frustre su ejecución, pudiendo este formular oposición posteriormente.',
+      feedbackWrong:
+        'El trámite sin audiencia previa no vulnera el debido proceso porque el derecho de defensa del afectado se difiere al momento posterior a la concesión o ejecución mediante la oposición.',
+      legalCitation: 'Art. 637 del Código Procesal Civil · Trámite de la medida cautelar y oposición.'
+    },
+    {
+      id: 'MC-014',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Conservación del uso de un bien durante el litigio',
+      caseText: 'Identificación de la medida destinada a mantener el estado de hecho o de derecho existente.',
+      questionPrompt: '4. ¿Qué medida cautelar permite que una persona continúe utilizando un bien mientras se resuelve el conflicto?',
+      options: {
+        A: 'Secuestro judicial.',
+        B: 'Anotación de demanda.',
+        C: 'Embargo en forma de depósito.',
+        D: 'Medida cautelar de no innovar.'
+      },
+      correctOption: 'D',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'La medida cautelar de no innovar (prohibición de innovar) está destinada a conservar la situación de hecho o de derecho existente al momento de la admisión de la demanda.',
+      feedbackWrong:
+        'Para mantener el statu quo y permitir que se conserve la situación de hecho existente mientras dura el proceso se recurre a la medida cautelar de no innovar.',
+      legalCitation: 'Art. 687 del Código Procesal Civil · Prohibición de innovar.'
+    },
+    {
+      id: 'MC-015',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Paralización cautelar de obras que alteran el bien litigioso',
+      caseText: 'Caso práctico sobre conservación del estado físico de un inmueble discutido judicialmente.',
+      questionPrompt: '5. Si una empresa continúa realizando construcciones que podrían perjudicar el inmueble discutido judicialmente, ¿qué medida podría solicitarse para evitar que la situación cambie?',
+      options: {
+        A: 'Medida de no innovar.',
+        B: 'Embargo en forma de retención.',
+        C: 'Intervención en recaudación.',
+        D: 'Secuestro conservativo.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Ante la inminencia de un perjuicio irreparable por alteración del bien litigioso, la medida de no innovar ordena conservar la situación de hecho e impide que continúen las modificaciones.',
+      feedbackWrong:
+        'Para impedir que se altere la situación de hecho del inmueble en litigio mediante nuevas construcciones, corresponde solicitar una medida de no innovar.',
+      legalCitation: 'Art. 687 del Código Procesal Civil · Medida de no innovar.'
+    },
+    {
+      id: 'MC-016',
+      category: 'MEDIDAS_CAUTELARES',
+      branchLabel: 'I. MEDIDAS CAUTELARES · PROCESAL CIVIL',
+      title: 'Finalidad de la medida cautelar de secuestro',
+      caseText: 'Análisis del secuestro judicial y conservativo frente al depósito.',
+      questionPrompt: '6. ¿Cuál es la finalidad de la medida cautelar de secuestro?',
+      options: {
+        A: 'Ordenar el pago de una deuda.',
+        B: 'Desapoderar de un bien al afectado para su custodia cuando corresponda.',
+        C: 'Declarar propietario al demandante.',
+        D: 'Cancelar una inscripción registral.'
+      },
+      correctOption: 'B',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'El secuestro tiene por finalidad específica la desposesión física del bien respecto de su tenedor y su entrega a un custodio designado por el Juez para su conservación.',
+      feedbackWrong:
+        'A diferencia del depósito (donde el propio afectado suele quedar como depositario), el secuestro implica desapoderar del bien al afectado para entregarlo a un custodio.',
+      legalCitation: 'Art. 643 del Código Procesal Civil · Secuestro judicial y conservativo.'
+    },
+
+    // ==========================================================================
+    // BLOQUE 3 · II. PROCESO ÚNICO DE EJECUCIÓN (Preguntas 11 a 15)
+    // ==========================================================================
+    {
+      id: 'PUE-011',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Sujetos procesales del proceso único de ejecución',
+      caseText: 'Identificación de las partes legitimadas activa y pasivamente en la relación procesal ejecutiva.',
+      questionPrompt: '11. ¿Quiénes intervienen principalmente en un proceso único de ejecución?',
+      options: {
+        A: 'El fiscal y el investigado.',
+        B: 'El demandante y el testigo.',
+        C: 'El ejecutante y el ejecutado.',
+        D: 'El juez y el perito.'
+      },
+      correctOption: 'C',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'En el proceso único de ejecución las partes principales se denominan ejecutante (acreedor legitimado en el título) y ejecutado (obligado en el título).',
+      feedbackWrong:
+        'La relación jurídica procesal en vía ejecutiva se traba entre el ejecutante y el ejecutado.',
+      legalCitation: 'Art. 690 del Código Procesal Civil · Legitimación y derecho de terceros.'
+    },
+    {
+      id: 'PUE-012',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Legitimación activa en el proceso de ejecución',
+      caseText: 'Denominación procesal del titular del derecho reconocido en el título ejecutivo.',
+      questionPrompt: '12. ¿Cómo se denomina a la persona que solicita el cumplimiento de una obligación mediante un proceso de ejecución?',
+      options: {
+        A: 'Ejecutante.',
+        B: 'Testigo.',
+        C: 'Perito.',
+        D: 'Tercero civil.'
+      },
+      correctOption: 'A',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Está legitimado para promover la ejecución quien en el título ejecutivo tiene reconocido un derecho en su favor, recibiendo la denominación procesal de ejecutante.',
+      feedbackWrong:
+        'Quien promueve la demanda ejecutiva exigiendo el cumplimiento de la obligación contenida en el título se denomina ejecutante.',
+      legalCitation: 'Art. 690 del Código Procesal Civil · Legitimación activa del ejecutante.'
+    },
+    {
+      id: 'PUE-013',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Contradicción fundada por extinción de la obligación',
+      caseText: 'Efecto procesal cuando el ejecutado prueba documentalmente haber pagado la deuda.',
+      questionPrompt: '13. ¿Qué ocurre si el ejecutado acredita que la obligación ya fue cancelada?',
+      options: {
+        A: 'Debe pagar nuevamente.',
+        B: 'Se duplica el monto de la deuda.',
+        C: 'Se declara fundada automáticamente la demanda.',
+        D: 'Puede declararse fundada la contradicción por extinción de la obligación.'
+      },
+      correctOption: 'D',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Si el ejecutado acredita fehacientemente el pago o cancelación de la deuda, el juez declara fundada la contradicción por la causal de extinción de la obligación.',
+      feedbackWrong:
+        'Acreditada la cancelación de la deuda mediante prueba idónea, se ampara la contradicción del ejecutado por extinción de la obligación.',
+      legalCitation: 'Art. 690-D inc. 3 del Código Procesal Civil · Causal de extinción de la obligación.'
+    },
+    {
+      id: 'PUE-014',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Documentos con mérito ejecutivo en la legislación peruana',
+      caseText: 'Identificación de títulos valores con mérito ejecutivo conforme al Código Procesal Civil.',
+      questionPrompt: '14. ¿Cuál de los siguientes documentos puede tener mérito ejecutivo según la legislación peruana?',
+      options: {
+        A: 'Una conversación informal por teléfono.',
+        B: 'Una letra de cambio que reúne los requisitos legales.',
+        C: 'Una carta de invitación.',
+        D: 'Una declaración verbal de un amigo.'
+      },
+      correctOption: 'B',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'La letra de cambio que reúne los requisitos formales exigidos por la Ley de Títulos Valores y el Código Procesal Civil posee mérito ejecutivo.',
+      feedbackWrong:
+        'Solo los documentos expresamente reconocidos por la ley, como una letra de cambio que cumple los requisitos legales, gozan de mérito ejecutivo.',
+      legalCitation: 'Art. 688 inc. 4 del Código Procesal Civil y Ley N.° 27287 (Ley de Títulos Valores).'
+    },
+    {
+      id: 'PUE-015',
+      category: 'PROCESO_EJECUCION',
+      branchLabel: 'II. PROCESO ÚNICO DE EJECUCIÓN · PROCESAL CIVIL',
+      title: 'Cumplimiento voluntario del mandato ejecutivo',
+      caseText: 'Conclusión del proceso de ejecución por satisfacción íntegra de la prestación debida.',
+      questionPrompt: '15. ¿Qué sucede cuando el ejecutado cumple voluntariamente con la obligación ordenada en el mandato ejecutivo?',
+      options: {
+        A: 'Se inicia otro proceso de conocimiento.',
+        B: 'Se le impone una nueva deuda.',
+        C: 'Se satisface la obligación y corresponde concluir la ejecución.',
+        D: 'Se declara nulo el título ejecutivo.'
+      },
+      correctOption: 'C',
+      rewardPoints: 35,
+      advanceSteps: 3,
+      penaltyType: 'RETROCESO',
+      penaltySteps: 1,
+      penaltyTitle: 'Sanción Procesal: Defecto Procesal (Retrocedes 1 casilla)',
+      feedbackCorrect:
+        'Cuando el ejecutado cumple voluntariamente lo ordenado en el mandato ejecutivo, se satisface el interés del acreedor ejecutante y concluye el proceso único de ejecución.',
+      feedbackWrong:
+        'El cumplimiento voluntario de la obligación exigida en el mandato ejecutivo extingue el crédito reclamado y da por concluida la ejecución.',
+      legalCitation: 'Art. 690-C del Código Procesal Civil · Cumplimiento del mandato ejecutivo.'
+    }
+  ];
+
+  global.Lexopoly = global.Lexopoly || {};
+  global.Lexopoly.QUESTIONS_BANK = QUESTIONS_BANK;
+})(window);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Correcaminos Jurídico | Juego Educativo de Derecho</title>
+  <link rel="icon" type="image/jpeg" href="./assets/logo.jpg?v=2" />
+  <meta name="description" content="El Correcaminos Jurídico: Aplicación web interactiva tipo Monopoly adaptada para estudiantes de derecho. Tablero perimetral 9x9, preguntas aleatorias de Medidas Cautelares y Proceso Único de Ejecución." />
+
+  <!-- Tipografías Editoriales Oficiales: Lora (Serif) + Inter (Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Hoja de Estilos del Sistema de Diseño Lexopoly -->
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body class="bg-[#F7F6F0] text-[#111111] antialiased selection:bg-[#FFD700] selection:text-[#111111]">
+  <!-- Contenedor Raíz de la Single Page Application (SPA) -->
+  <div id="app"></div>
+
+  <!-- Módulos de Datos y Configuración -->
+  <script src="./js/data/boardConfig.js"></script>
+  <script src="./js/data/questionsBank.js"></script>
+
+  <!-- Núcleo Lógico: Iconos, Audio Sintético, Motor de Sanciones y Gestor de Estado -->
+  <script src="./js/core/IconRegistry.js"></script>
+  <script src="./js/core/SoundEngine.js"></script>
+  <script src="./js/core/SanctionsEngine.js"></script>
+  <script src="./js/core/GameState.js"></script>
+
+  <!-- Componentes de Interfaz Visual (Vistas y Modales) -->
+  <script src="./js/components/MenuView.js"></script>
+  <script src="./js/components/BoardView.js"></script>
+  <script src="./js/components/SidebarView.js"></script>
+  <script src="./js/components/QuestionModal.js"></script>
+  <script src="./js/components/DesignSystemView.js"></script>
+  <script src="./js/components/ModalsView.js"></script>
+
+  <!-- Controlador Principal de la Aplicación -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,10 @@
+{
+  "name": "lexopoly-el-reto-juridico",
+  "version": "1.0.0",
+  "description": "Juego educativo tipo Monopoly adaptado para estudiantes de derecho (Tablero 9x9, 28 Casos Prácticos y Sanciones Procesales)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+
